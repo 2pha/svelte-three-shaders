@@ -23,7 +23,6 @@
     div.appendChild(renderer.domElement);
     sizeRenderer();
     animate();
-    window.addEventListener("resize", sizeRenderer, false);
   });
 
   function setupScene() {
@@ -59,8 +58,6 @@
     material = new THREE.MeshBasicMaterial();
     // Create and add mesh/object.
     addMesh();
-    // Add resize listener.
-    //window.addEventListener("resize", sizeRenderer.bind(, false);
   }
 
   function addMesh() {
@@ -93,4 +90,5 @@
   }
 </script>
 
+<svelte:window on:resize={sizeRenderer} />
 <div bind:this={div} />
