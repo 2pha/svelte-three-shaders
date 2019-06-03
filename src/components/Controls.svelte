@@ -1,11 +1,24 @@
 <script>
-  //import * as dat from "dat.gui";
+  import * as dat from "dat.gui";
+  import { onMount } from "svelte";
 
-  //const gui = new dat.GUI();
+  let gui;
 
   export let currentShader;
 
   let div;
+
+  onMount(async () => {
+    gui = new dat.GUI({ autoPlace: false });
+    div.appendChild(gui.domElement);
+  });
 </script>
 
-<div bind:this={div} />
+<style>
+  #controls {
+    position: absolute;
+    right: 0px;
+  }
+</style>
+
+<div id="controls" bind:this={div} />
