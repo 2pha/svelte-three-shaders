@@ -1,23 +1,37 @@
 <script>
   import { onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
 
-  let gui;
+  import GuiSelect from "./gui/GuiSelect.svelte";
 
-  export let currentShader;
+  const dispatch = createEventDispatcher();
+  export let shapes = [];
+  export let shaders = [];
+  export let currentShader = {};
 
-  let div;
+  $: shapeNames = shapes.map(shape => shape.name);
+  $: shaderNames = shaders.map(shader => shader.name);
+  $: customUniforms = currentShader.customUniforms || {};
 
   onMount(async () => {
     //gui = new dat.GUI({ autoPlace: false });
     //div.appendChild(gui.domElement);
   });
+
+  function handleShapeChange(e) {
+    dispatch("shapeSelected", {
+      shapeName: e.target.value
+    });
+  }
 </script>
 
 <style>
-  #controls {
+  div {
     position: absolute;
     right: 0px;
   }
 </style>
 
-<div id="controls" bind:this={div} />
+<div id="controls">
+  <GuiSelect label="Shape" on:change={handleShapeChange} />
+</div>

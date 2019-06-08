@@ -61,6 +61,10 @@
   ];
 
   let threeVersion = THREE.REVISION;
+
+  function shapeChange(e) {
+    console.log(e);
+  }
 </script>
 
 <style>
@@ -80,7 +84,7 @@
 
 <Scene />
 <Stats />
-<Controls />
+<Controls on:shapeSelected={shapeChange} />
 <div id="info">
   Three.js ShaderMaterial experiments.
   <br />
