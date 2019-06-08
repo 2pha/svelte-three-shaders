@@ -1,6 +1,9 @@
 <script>
   import Scene from "./components/Scene.svelte";
   import Controls from "./components/Controls.svelte";
+  import Stats from "./components/Stats.svelte";
+
+  import * as THREE from "three";
 
   import basicColor from "./shaders/BasicColor";
   import basicColorLights from "./shaders/BasicColorLights";
@@ -56,7 +59,45 @@
       args: [100, 30, 100, 16]
     }
   ];
+
+  let threeVersion = THREE.REVISION;
 </script>
 
+<style>
+  #info {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+  }
+  #info a {
+    color: #fff;
+  }
+</style>
+
 <Scene />
+<Stats />
 <Controls />
+<div id="info">
+  Three.js ShaderMaterial experiments.
+  <br />
+  Originals at
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://2pha.com/blog/experimenting-threejs-shaders-and-shadermaterial/">
+    this blog post
+  </a>
+  <br />
+  Build with Three.js {threeVersion} and Svelte.js
+  <br />
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://github.com/2pha/svelte-three-shaders">
+    https://github.com/2pha/svelte-three-shaders
+  </a>
+</div>
