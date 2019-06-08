@@ -1,5 +1,4 @@
 <script>
-  import * as dat from "dat.gui";
   import { onMount } from "svelte";
 
   let gui;
@@ -9,8 +8,8 @@
   let div;
 
   onMount(async () => {
-    gui = new dat.GUI({ autoPlace: false });
-    div.appendChild(gui.domElement);
+    //gui = new dat.GUI({ autoPlace: false });
+    //div.appendChild(gui.domElement);
   });
 </script>
 
