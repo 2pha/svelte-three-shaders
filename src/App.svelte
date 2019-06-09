@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   import Scene from "./components/Scene.svelte";
   import Controls from "./components/Controls.svelte";
   import Stats from "./components/Stats.svelte";
@@ -62,8 +64,50 @@
 
   let threeVersion = THREE.REVISION;
 
+  let currentShader = {};
+  let currentShaderObject = {};
+  let currentShape = shapes[0];
+  let showCode = false;
+
+  onMount(async () => {
+    setShaderFromName("Basic Color");
+  });
+
+  function getShaderFromName(name) {
+    return shaders.find(x => x.name === name);
+  }
+
+  function setShaderFromName(name) {
+    let shader = getShaderFromName(name);
+    //create the options object to send to ShaderMaterial.
+    let shaderObject = {
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader,
+      lights: true
+    };
+    // Add uniforms if present.
+    if ("uniforms" in shader) {
+      // Using UniformUtils will clone the shader files uniforms,
+      shaderObject.uniforms = THREE.UniformsUtils.merge([
+        THREE.UniformsLib["lights"],
+        shader.uniforms
+      ]);
+    }
+    // Set this new material on the mesh.
+    let material = new THREE.ShaderMaterial(shaderObject);
+    // add the original uniforms here so we can loop over them in the Controls, because other uniforms are added that we don't want controls for.
+    material.customUniforms = shader.uniforms;
+
+    currentShader = material;
+    currentShaderObject = shader;
+  }
+
+  function getShapeFromName(name) {
+    return shapes.find(x => x.name === name);
+  }
+
   function shapeChange(e) {
-    console.log(e);
+    currentShape = getShapeFromName(e.detail.shapeName);
   }
 </script>
 
@@ -82,9 +126,9 @@
   }
 </style>
 
-<Scene />
+<Scene {currentShape} {currentShader} />
 <Stats />
-<Controls on:shapeSelected={shapeChange} />
+<Controls {shapes} on:shapeSelected={shapeChange} />
 <div id="info">
   Three.js ShaderMaterial experiments.
   <br />

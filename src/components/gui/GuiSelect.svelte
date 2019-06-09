@@ -1,11 +1,6 @@
 <script>
   export let label = "";
   export let options = [];
-  /*
-  function handleSelect(e) {
-    console.log(e.target.value);
-  }
-  */
 </script>
 
 <style>
@@ -53,8 +48,9 @@
   <div class="gui-label">{label}</div>
   <div class="gui-controller">
     <select on:change>
-      <option>test</option>
-      <option>test2</option>
+      {#each options as option}
+        <option>{option}</option>
+      {/each}
     </select>
   </div>
 </div>

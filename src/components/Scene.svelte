@@ -11,12 +11,21 @@
     pointLightHelper1,
     light2,
     pointLightHelper2,
-    material,
+    geometry,
     mesh;
 
   export let currentShape;
   export let currentShader;
   export let animateCallback = function() {};
+
+  // how to simply react (call a function) when a specific property changes?
+  // this does not seem right (though it works).
+  $: if (currentShape) {
+    addMesh();
+  }
+  $: if (currentShader) {
+    mesh.material = currentShader;
+  }
 
   onMount(async () => {
     setupScene();
@@ -55,16 +64,24 @@
     pointLightHelper2 = new THREE.PointLightHelper(light2, 10);
     scene.add(pointLightHelper2);
     // Create initial Material.
-    material = new THREE.MeshBasicMaterial();
+    let material = new THREE.MeshBasicMaterial();
     // Create and add mesh/object.
     addMesh();
   }
 
   function addMesh() {
     // remove previous mesh.
-    //if (Boolean(this.mesh)) {
-    //this.scene.remove(this.mesh);
-    //}
+    if (Boolean(mesh)) {
+      scene.remove(mesh);
+    }
+
+    let shapeOb = currentShape;
+    geometry = new THREE[shapeOb.class](...shapeOb.args);
+    mesh = new THREE.Mesh(geometry, currentShader);
+    // Check we have mounted and created a scene.
+    if (typeof scene !== "undefined") {
+      scene.add(mesh);
+    }
   }
 
   function sizeRenderer() {
@@ -75,8 +92,8 @@
 
   function animate() {
     let timer = Date.now() * 0.0005;
-    //mesh.rotation.x += 0.005;
-    //mesh.rotation.y += 0.01;
+    mesh.rotation.x += 0.005;
+    mesh.rotation.y += 0.01;
     // Check for props for light distance, or just put 400
     light1.position.x = Math.cos(timer) * 250;
     light1.position.z = Math.sin(timer) * 250;
