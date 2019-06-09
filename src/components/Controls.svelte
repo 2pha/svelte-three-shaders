@@ -17,6 +17,12 @@
       shapeName: e.target.value
     });
   }
+
+  function handleShaderChange(e) {
+    dispatch("shaderSelected", {
+      shaderName: e.target.value
+    });
+  }
 </script>
 
 <style>
@@ -28,4 +34,8 @@
 
 <div id="controls">
   <GuiSelect label="Shape" options={shapeNames} on:change={handleShapeChange} />
+  <GuiSelect
+    label="Shader"
+    options={shaderNames}
+    on:change={handleShaderChange} />
 </div>

@@ -128,7 +128,7 @@
 
 <Scene {currentShape} {currentShader} />
 <Stats />
-<Controls {shapes} on:shapeSelected={shapeChange} />
+<Controls {shapes} {shaders} on:shapeSelected={shapeChange} />
 <div id="info">
   Three.js ShaderMaterial experiments.
   <br />
