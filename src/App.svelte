@@ -106,8 +106,8 @@
     return shapes.find(x => x.name === name);
   }
 
-  function shapeChange(e) {
-    currentShape = getShapeFromName(e.detail.shapeName);
+  function changeShape(shapeName) {
+    currentShape = getShapeFromName(shapeName);
   }
 </script>
 
@@ -128,7 +128,15 @@
 
 <Scene {currentShape} {currentShader} />
 <Stats />
-<Controls {shapes} {shaders} on:shapeSelected={shapeChange} />
+<Controls
+  {shapes}
+  {shaders}
+  on:shapeSelected={e => {
+    changeShape(e.detail.shapeName);
+  }}
+  on:shaderSelected={e => {
+    setShaderFromName(e.detail.shaderName);
+  }} />
 <div id="info">
   Three.js ShaderMaterial experiments.
   <br />
