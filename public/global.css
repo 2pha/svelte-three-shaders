@@ -12,3 +12,109 @@ canvas {
   display: block;
   position: fixed;
 }
+
+#controls {
+  position: absolute;
+  right: 0px;
+  color: #ffffff;
+}
+#controls .gui-select {
+  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
+}
+#controls select {
+  background-color: rgb(68, 68, 68);
+  border: none;
+  outline: none;
+  color: rgb(0, 255, 170);
+  font-size: 11px;
+  line-height: 18;
+  font-family: Arial;
+  height: 18px;
+  user-select: none;
+  cursor: pointer;
+}
+#controls .gui-item {
+  border-bottom: 1px solid rgb(51, 51, 51);
+  background-color: rgb(26, 26, 26);
+  min-height: 24px;
+  padding: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+#controls .gui-label {
+  width: 96px;
+  padding: 3px;
+  color: rgb(255, 255, 255);
+  cursor: default;
+  user-select: none;
+}
+#controls .gui-controller {
+  width: 192px;
+  color: rgb(0, 255, 170);
+}
+#controls input[type="range"] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+  width: 65%;
+  height: 18px;
+  margin: 0px; /* needed for firefox */
+}
+#controls input[type="range"]:focus {
+  outline: none;
+}
+/* CHROME */
+#controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 11px;
+  width: 11px;
+  border-radius: 0px;
+  background: rgb(68, 68, 68);
+  border: 1px solid rgb(0, 255, 170);
+  cursor: pointer;
+  margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic*/
+}
+#controls input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: rgb(68, 68, 68);
+  border-radius: 0px;
+  border: 0px solid #010101;
+  margin-top: 11px;
+}
+#controls input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: rgb(68, 68, 68);
+}
+/* FIREFOX */
+#controls input[type="range"]::-moz-range-thumb {
+  border: 1px solid rgb(0, 255, 170);
+  height: 11px;
+  width: 11px;
+  border-radius: 0px;
+  background: rgb(68, 68, 68);
+  cursor: pointer;
+}
+#controls input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: rgb(68, 68, 68);
+  border-radius: 0px;
+  border: none;
+  margin-top: 11px;
+}
+/* FUCK MICROSOFT BROWSERS */
+/* input[type='range']::-ms-track {
+width: 65%;
+cursor: pointer;
+background: transparent;
+border-color: transparent;
+color: transparent;
+} */
+#controls input[type="text"] {
+  width: 30%;
+}

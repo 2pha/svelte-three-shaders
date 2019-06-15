@@ -131,6 +131,7 @@
 <Controls
   {shapes}
   {shaders}
+  {currentShader}
   on:shapeSelected={e => {
     changeShape(e.detail.shapeName);
   }}
