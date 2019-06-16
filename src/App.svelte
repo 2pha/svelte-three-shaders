@@ -95,7 +95,8 @@
     }
     // Set this new material on the mesh.
     let material = new THREE.ShaderMaterial(shaderObject);
-    // add the original uniforms here so we can loop over them in the Controls, because other uniforms are added that we don't want controls for.
+    // add the original uniforms here so we can loop over them in the Controls,
+    // because other uniforms are added that we don't want controls for.
     material.customUniforms = shader.uniforms;
 
     currentShader = material;

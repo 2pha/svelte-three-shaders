@@ -17,12 +17,11 @@ canvas {
   position: absolute;
   right: 0px;
   color: #ffffff;
-}
-#controls .gui-select {
   font-size: 11px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: normal;
 }
+
 #controls select {
   background-color: rgb(68, 68, 68);
   border: none;
@@ -117,4 +116,20 @@ color: transparent;
 } */
 #controls input[type="text"] {
   width: 30%;
+}
+
+#controls .closed {
+  display: none;
+}
+#controls .gui-color-toggle {
+  font-size: 11px;
+  line-height: 18px;
+  height: 18px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  text-shadow: black 0px 0px 4px, black 0px 0px 4px, black 0px 0px 4px,
+    black 0px 0px 4px, black 0px 0px 4px;
+  cursor: pointer;
+  user-select: none;
 }

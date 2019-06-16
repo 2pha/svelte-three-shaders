@@ -3,6 +3,7 @@
 
   import GuiSelect from "./gui/GuiSelect.svelte";
   import GuiNumberRange from "./gui/GuiNumberRange.svelte";
+  import GuiColor from "./gui/GuiColor.svelte";
 
   const dispatch = createEventDispatcher();
   export let shapes = [];
@@ -28,6 +29,14 @@
   function numberUniformChange(e) {
     currentShader.uniforms[e.detail.key].value = e.detail.value;
   }
+
+  function colorUniformChange(e) {
+    currentShader.uniforms[e.detail.label].value.setRGB(
+      e.detail.value.red / 256,
+      e.detail.value.green / 256,
+      e.detail.value.blue / 256
+    );
+  }
 </script>
 
 <style>
@@ -41,14 +50,24 @@
     options={shaderNames}
     on:change={handleShaderChange} />
   {#each Object.entries(customUniforms) as [key, uniform]}
+    <!-- Here we just use the key from customUniforms, but use the values from the original uniforms
+    (as opposed to using the customUniforms directly unlike in the Vue and React examples),
+    to do with how svelte seems to be making and updating references -->
     {#if uniform.type == 'f' && !Boolean(uniform.hidden)}
       <GuiNumberRange
         label={key}
-        bind:value={uniform.value}
-        min={uniform.min}
-        max={uniform.max}
-        step={uniform.step}
+        bind:value={currentShader.uniforms[key].value}
+        min={currentShader.uniforms[key].min}
+        max={currentShader.uniforms[key].max}
+        step={currentShader.uniforms[key].step}
         on:change={numberUniformChange} />
-    {:else if uniform.type == 'c'}{/if}
+    {:else if uniform.type == 'c' && !Boolean(uniform.hidden)}
+      <GuiColor
+        label={key}
+        red={parseInt(currentShader.uniforms[key].value.r * 256, 10)}
+        green={parseInt(currentShader.uniforms[key].value.g * 256, 10)}
+        blue={parseInt(currentShader.uniforms[key].value.b * 256, 10)}
+        on:change={colorUniformChange} />
+    {/if}
   {/each}
 </div>
