@@ -22,7 +22,8 @@ canvas {
   line-height: normal;
 }
 
-#controls select {
+#controls select,
+#controls input {
   background-color: rgb(68, 68, 68);
   border: none;
   outline: none;
