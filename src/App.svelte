@@ -4,6 +4,7 @@
   import Scene from "./components/Scene.svelte";
   import Controls from "./components/Controls.svelte";
   import Stats from "./components/Stats.svelte";
+  import CodeView from "./components/CodeView.svelte";
 
   import * as THREE from "three";
 
@@ -138,6 +139,9 @@
   }}
   on:shaderSelected={e => {
     setShaderFromName(e.detail.shaderName);
+  }}
+  on:codeButtonClick={e => {
+    showCode = true;
   }} />
 <div id="info">
   Three.js ShaderMaterial experiments.
@@ -159,3 +163,8 @@
     https://github.com/2pha/svelte-three-shaders
   </a>
 </div>
+<CodeView
+  bind:visible={showCode}
+  shaderName={currentShaderObject.name}
+  vertexShader={currentShaderObject.vertexShader}
+  fragmentShader={currentShaderObject.fragmentShader} />

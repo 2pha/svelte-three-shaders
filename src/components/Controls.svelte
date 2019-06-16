@@ -4,6 +4,7 @@
   import GuiSelect from "./gui/GuiSelect.svelte";
   import GuiNumberRange from "./gui/GuiNumberRange.svelte";
   import GuiColor from "./gui/GuiColor.svelte";
+  import GuiButton from "./gui/GuiButton.svelte";
 
   const dispatch = createEventDispatcher();
   export let shapes = [];
@@ -36,6 +37,10 @@
       e.detail.value.green / 256,
       e.detail.value.blue / 256
     );
+  }
+
+  function codeButtonClick(e) {
+    dispatch("codeButtonClick");
   }
 </script>
 
@@ -70,4 +75,5 @@
         on:change={colorUniformChange} />
     {/if}
   {/each}
+  <GuiButton label="view shader code" on:click={codeButtonClick} />
 </div>

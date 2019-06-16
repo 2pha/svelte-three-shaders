@@ -133,3 +133,57 @@ color: transparent;
   cursor: pointer;
   user-select: none;
 }
+#controls .gui-button {
+  text-align: center;
+  background-color: rgb(68, 68, 68);
+  cursor: pointer;
+  user-select: none;
+  padding: 3px;
+}
+
+
+
+#codeviewcontainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#closebar {
+  margin: 20px 20px 10px;
+  height: 30px;
+  position: relative;
+}
+#closebar #bartitle {
+  color: #fff;
+}
+#closebar #closebutton {
+  border: 1px solid #fff;
+  display: inline-block;
+  color: #fff;
+  background-color: #444;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  line-height: 28px;
+  padding: 0 10px;
+}
+#codeview {
+  margin: 10px 20px 20px;
+  color: #fff;
+}
+#codeview .pane {
+  -ms-flex: 1 0 100%;
+  flex: 1 0 100%;
+  padding: 10px;
+  border: 1px solid #fff;
+  margin: 10px 0;
+  background-color: #444;
+}
