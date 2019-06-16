@@ -1,10 +1,6 @@
 <script>
   export let label = "";
   export let options = [];
-
-  function testing(e) {
-    console.log(e);
-  }
 </script>
 
 <style>

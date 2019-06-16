@@ -23,11 +23,9 @@
     dispatch("shaderSelected", {
       shaderName: e.target.value
     });
-    console.log(customUniforms);
   }
 
   function numberUniformChange(e) {
-    console.log(currentShader);
     currentShader.uniforms[e.detail.key].value = e.detail.value;
   }
 </script>
