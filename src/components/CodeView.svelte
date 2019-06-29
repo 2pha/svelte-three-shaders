@@ -11,7 +11,7 @@
     <div id="bartitle">{shaderName}</div>
     <div
       id="closebutton"
-      on:click={() => {
+      on:click={e => {
         visible = false;
       }}>
       Close

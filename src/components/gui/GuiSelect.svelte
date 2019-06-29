@@ -4,7 +4,7 @@
 </script>
 
 <style>
-  /* css in gloobal.css */
+  /* css in global.css */
 </style>
 
 <div class="gui-item gui-select">

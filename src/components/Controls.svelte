@@ -27,10 +27,6 @@
     });
   }
 
-  function numberUniformChange(e) {
-    currentShader.uniforms[e.detail.key].value = e.detail.value;
-  }
-
   function colorUniformChange(e) {
     currentShader.uniforms[e.detail.label].value.setRGB(
       e.detail.value.red / 256,
@@ -64,14 +60,13 @@
         bind:value={currentShader.uniforms[key].value}
         min={currentShader.uniforms[key].min}
         max={currentShader.uniforms[key].max}
-        step={currentShader.uniforms[key].step}
-        on:change={numberUniformChange} />
+        step={currentShader.uniforms[key].step} />
     {:else if uniform.type == 'c' && !Boolean(uniform.hidden)}
       <GuiColor
         label={key}
-        red={parseInt(currentShader.uniforms[key].value.r * 256, 10)}
-        green={parseInt(currentShader.uniforms[key].value.g * 256, 10)}
-        blue={parseInt(currentShader.uniforms[key].value.b * 256, 10)}
+        red={currentShader.uniforms[key].value.r * 255}
+        green={parseInt(currentShader.uniforms[key].value.g * 255, 10)}
+        blue={parseInt(currentShader.uniforms[key].value.b * 255, 10)}
         on:change={colorUniformChange} />
     {/if}
   {/each}

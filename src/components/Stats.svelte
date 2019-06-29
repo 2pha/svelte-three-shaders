@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { onDestroy } from "svelte";
 
-  let div;
   let fps = 0;
   let frames = 0;
   let beginTime = 0;
@@ -54,4 +53,4 @@
   }
 </style>
 
-<div bind:this={div}>{fps} fps</div>
+<div>{fps} fps</div>

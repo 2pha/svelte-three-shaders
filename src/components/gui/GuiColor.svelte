@@ -8,7 +8,6 @@
   export let green = 0;
   export let blue = 0;
   let expanded = false;
-  $: closed = expanded ? "" : "closed";
 
   function colorInputChange() {
     dispatch("change", {
@@ -20,10 +19,6 @@
       }
     });
   }
-
-  function toggleExpanded() {
-    expanded = !expanded;
-  }
 </script>
 
 <style>
@@ -34,35 +29,31 @@
   <div class="gui-label">{label}</div>
   <div class="gui-controller">
     <div
-      on:click={toggleExpanded}
+      on:click={e => {
+        expanded = !expanded;
+      }}
       class="gui-color-toggle"
       style="background-color: rgb({red}, {green}, {blue});">
        {red}, {green}, {blue}
     </div>
-    <div class="gui-color-sliders {closed}">
+    <div class="gui-color-sliders" class:closed={!expanded}>
       <GuiNumberRange
         label="red"
-        on:change={e => {
-          colorInputChange();
-        }}
+        on:change={colorInputChange}
         bind:value={red}
         min="0"
         max="255"
         step="1.0" />
       <GuiNumberRange
         label="green"
-        on:change={e => {
-          colorInputChange();
-        }}
+        on:change={colorInputChange}
         bind:value={green}
         min="0"
         max="255"
         step="1.0" />
       <GuiNumberRange
         label="blue"
-        on:change={e => {
-          colorInputChange();
-        }}
+        on:change={colorInputChange}
         bind:value={blue}
         min="0"
         max="255"
