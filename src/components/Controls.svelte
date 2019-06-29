@@ -64,7 +64,7 @@
     {:else if uniform.type == 'c' && !Boolean(uniform.hidden)}
       <GuiColor
         label={key}
-        red={currentShader.uniforms[key].value.r * 255}
+        red={parseInt(currentShader.uniforms[key].value.r * 255, 10)}
         green={parseInt(currentShader.uniforms[key].value.g * 255, 10)}
         blue={parseInt(currentShader.uniforms[key].value.b * 255, 10)}
         on:change={colorUniformChange} />
