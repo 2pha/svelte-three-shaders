@@ -30,7 +30,7 @@
   /* css in global.css */
 </style>
 
-<div class="gui-item gui-number-range" test={value}>
+<div class="gui-item gui-number-range">
   <div class="gui-label">{label}</div>
   <div class="gui-controller">
     <input type="range" {value} {min} {max} {step} on:change={valueChange} />
