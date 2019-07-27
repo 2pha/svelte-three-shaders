@@ -64,6 +64,7 @@
   ];
 
   let threeVersion = THREE.REVISION;
+  let clock = new THREE.Clock();
 
   let currentShader = {};
   let currentShaderObject = {};
@@ -123,6 +124,12 @@
       );
     }
   }
+
+  function animateCallback() {
+    if (Boolean(currentShaderObject) && Boolean(currentShaderObject.update)) {
+      currentShaderObject.update(currentShader.uniforms, clock);
+    }
+  }
 </script>
 
 <style>
@@ -140,7 +147,7 @@
   }
 </style>
 
-<Scene {currentShape} {currentShader} />
+<Scene {currentShape} {currentShader} {animateCallback} />
 <Stats />
 <Controls
   {shapes}
