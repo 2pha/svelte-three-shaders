@@ -9,12 +9,10 @@
   const dispatch = createEventDispatcher();
   export let shapes = [];
   export let shaders = [];
-  //export let currentShader = {};
   export let uniforms = {};
 
   $: shapeNames = shapes.map(shape => shape.name);
   $: shaderNames = shaders.map(shader => shader.name);
-  //$: customUniforms = currentShader.customUniforms || {};
 
   function handleShapeChange(e) {
     dispatch("shapeSelected", {
