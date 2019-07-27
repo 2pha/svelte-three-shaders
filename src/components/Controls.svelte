@@ -9,11 +9,12 @@
   const dispatch = createEventDispatcher();
   export let shapes = [];
   export let shaders = [];
-  export let currentShader = {};
+  //export let currentShader = {};
+  export let uniforms = {};
 
   $: shapeNames = shapes.map(shape => shape.name);
   $: shaderNames = shaders.map(shader => shader.name);
-  $: customUniforms = currentShader.customUniforms || {};
+  //$: customUniforms = currentShader.customUniforms || {};
 
   function handleShapeChange(e) {
     dispatch("shapeSelected", {
@@ -27,12 +28,8 @@
     });
   }
 
-  function colorUniformChange(e) {
-    currentShader.uniforms[e.detail.label].value.setRGB(
-      e.detail.value.red / 256,
-      e.detail.value.green / 256,
-      e.detail.value.blue / 256
-    );
+  function uniformChange(e) {
+    dispatch("uniformChange", e);
   }
 
   function codeButtonClick(e) {
@@ -50,24 +47,38 @@
     label="Shader"
     options={shaderNames}
     on:change={handleShaderChange} />
-  {#each Object.entries(customUniforms) as [key, uniform]}
-    <!-- Here we just use the key from customUniforms, but use the values from the original uniforms
-    (as opposed to using the customUniforms directly unlike in the Vue and React examples),
-    to do with how svelte seems to be making and updating references -->
+  {#each Object.entries(uniforms) as [key, uniform]}
     {#if uniform.type == 'f' && !Boolean(uniform.hidden)}
       <GuiNumberRange
         label={key}
-        bind:value={currentShader.uniforms[key].value}
-        min={currentShader.uniforms[key].min}
-        max={currentShader.uniforms[key].max}
-        step={currentShader.uniforms[key].step} />
+        bind:value={uniform.value}
+        min={uniform.min}
+        max={uniform.max}
+        step={uniform.step}
+        on:valueChange={e => {
+          uniformChange({
+            type: uniform.type,
+            key: key,
+            value: e.detail.value
+          });
+        }} />
     {:else if uniform.type == 'c' && !Boolean(uniform.hidden)}
       <GuiColor
         label={key}
-        red={parseInt(currentShader.uniforms[key].value.r * 255, 10)}
-        green={parseInt(currentShader.uniforms[key].value.g * 255, 10)}
-        blue={parseInt(currentShader.uniforms[key].value.b * 255, 10)}
-        on:change={colorUniformChange} />
+        red={parseInt(uniform.value.r * 255, 10)}
+        green={parseInt(uniform.value.g * 255, 10)}
+        blue={parseInt(uniform.value.b * 255, 10)}
+        on:colorChange={e => {
+          uniformChange({
+            type: uniform.type,
+            key: key,
+            value: {
+              red: e.detail.red,
+              green: e.detail.green,
+              blue: e.detail.blue
+            }
+          });
+        }} />
     {/if}
   {/each}
   <GuiButton label="view shader code" on:click={codeButtonClick} />

@@ -19,7 +19,7 @@
       newval = max;
     }
     value = newval;
-    dispatch("change", {
+    dispatch("valueChange", {
       key: label,
       value: newval
     });

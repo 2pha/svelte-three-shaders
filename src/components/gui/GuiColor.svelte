@@ -10,13 +10,10 @@
   let expanded = false;
 
   function colorInputChange() {
-    dispatch("change", {
-      label: label,
-      value: {
-        red: red,
-        green: green,
-        blue: blue
-      }
+    dispatch("colorChange", {
+      red: red,
+      green: green,
+      blue: blue
     });
   }
 </script>
@@ -39,21 +36,21 @@
     <div class="gui-color-sliders" class:closed={!expanded}>
       <GuiNumberRange
         label="red"
-        on:change={colorInputChange}
+        on:valueChange={colorInputChange}
         bind:value={red}
         min="0"
         max="255"
         step="1.0" />
       <GuiNumberRange
         label="green"
-        on:change={colorInputChange}
+        on:valueChange={colorInputChange}
         bind:value={green}
         min="0"
         max="255"
         step="1.0" />
       <GuiNumberRange
         label="blue"
-        on:change={colorInputChange}
+        on:valueChange={colorInputChange}
         bind:value={blue}
         min="0"
         max="255"

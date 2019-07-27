@@ -111,6 +111,18 @@
   function changeShape(shapeName) {
     currentShape = getShapeFromName(shapeName);
   }
+
+  function uniformChange(type, key, value) {
+    if (type === "f") {
+      currentShader.uniforms[key].value = value;
+    } else if (type === "c") {
+      currentShader.uniforms[key].value.setRGB(
+        value.red / 256,
+        value.green / 256,
+        value.blue / 256
+      );
+    }
+  }
 </script>
 
 <style>
@@ -133,7 +145,7 @@
 <Controls
   {shapes}
   {shaders}
-  {currentShader}
+  uniforms={currentShader.customUniforms}
   on:shapeSelected={e => {
     changeShape(e.detail.shapeName);
   }}
@@ -142,6 +154,9 @@
   }}
   on:codeButtonClick={e => {
     showCode = true;
+  }}
+  on:uniformChange={e => {
+    uniformChange(e.detail.type, e.detail.key, e.detail.value);
   }} />
 <div id="info">
   Three.js ShaderMaterial experiments.
