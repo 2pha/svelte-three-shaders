@@ -118,9 +118,9 @@
       currentShader.uniforms[key].value = value;
     } else if (type === "c") {
       currentShader.uniforms[key].value.setRGB(
-        value.red / 256,
-        value.green / 256,
-        value.blue / 256
+        value.red / 255,
+        value.green / 255,
+        value.blue / 255
       );
     }
   }
@@ -152,7 +152,7 @@
 <Controls
   {shapes}
   {shaders}
-  uniforms={currentShader.customUniforms}
+  uniforms={currentShader.uniforms}
   on:shapeSelected={e => {
     changeShape(e.detail.shapeName);
   }}
