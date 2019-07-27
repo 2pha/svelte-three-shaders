@@ -33,7 +33,13 @@
 <div class="gui-item gui-number-range">
   <div class="gui-label">{label}</div>
   <div class="gui-controller">
-    <input type="range" {value} {min} {max} {step} on:change={valueChange} />
-    <input type="text" {value} on:change={valueChange} />
+    <input
+      type="range"
+      {value}
+      {min}
+      {max}
+      {step}
+      on:input|preventDefault={valueChange} />
+    <input type="text" {value} on:change|preventDefault={valueChange} />
   </div>
 </div>

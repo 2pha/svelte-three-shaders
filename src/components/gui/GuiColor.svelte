@@ -34,7 +34,7 @@
       }}
       class="gui-color-toggle"
       style="background-color: rgb({red}, {green}, {blue});">
-       {red}, {green}, {blue}
+      {red}, {green}, {blue}
     </div>
     <div class="gui-color-sliders" class:closed={!expanded}>
       <GuiNumberRange
